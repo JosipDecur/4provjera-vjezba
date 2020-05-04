@@ -24,6 +24,20 @@ bool tekuci(unsigned long long broj)
 
 }
 
+bool ispis_podataka(string prezimeIme[], unsigned long long int brRacuna[],double saldo[],int brKlijenata,string pretrazivanje)
+{
+    int br=0;
+    for(int i=0;i<brKlijenata;i++)
+    {
+        if(prezimeIme[i]==pretrazivanje){
+        cout<<brRacuna[i]<<", "<<saldo[i]<<endl;
+        br++;}
+    }
+    if(br==0)
+        return false;
+    return true;
+}
+
 int main()
 {
     int brKlijenata=0;
@@ -75,7 +89,7 @@ int main()
             brKlijenata++;
         }
         else if(izbor==2)
-               {
+        {
                    for(int i=0; i<brKlijenata; i++)
                    {
                        cout << brRacuna[i] << ", " << prezimeIme[i] << ", " << saldo[i] << endl;
@@ -85,7 +99,18 @@ int main()
                    cout<<"Klijent koji ima najveci saldo: "<< prezimeIme[max_index]<<endl;
                    cout<<"Broj racuna sa negativnim saldom: "<<count_if(saldo,saldo+brKlijenata,negativni_saldo)<<endl;
                    cout<<"Broj tekucih racuna: "<<count_if(brRacuna,brRacuna+brKlijenata,tekuci)<<endl;
-               }
+        }
+        else if(izbor==3)
+        {
+                    cout<< "Unesite ime i prezime koje pretrazujete: ";
+                    string pretrazivanje;
+                    cin.ignore();
+                    getline(cin,pretrazivanje);
+                    if(ispis_podataka(prezimeIme,brRacuna,saldo,brKlijenata,pretrazivanje)==false)
+                    {
+                        cout<<"Nema takvih klijenata"<<endl;
+                    }
+        }
     }
     return 0;
 }
